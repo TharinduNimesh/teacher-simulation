@@ -1,9 +1,12 @@
 <script setup>
+const color = useColorMode();
+
+color.preference = "dark";
 </script>
 
 <template>
-  <div>
-    <h1>Chat Page</h1>
-    <NuxtLink to="/">Home</NuxtLink>
+  <div class="w-full h-screen flex bg-slate-200 dark:bg-[#202124] overflow-hidden">
+    <AppSideBar />
   </div>
 </template>
+

@@ -1,0 +1,90 @@
+<script setup>
+useHead({
+  title: "Chat | Jennie - Virtual Learning Assistant",
+});
+const isInfoOpen = ref(false);
+
+onMounted(() => {
+  window.addEventListener("click", (e) => {
+    if (e.target.closest(".profile")) return;
+    isInfoOpen.value = false;
+  });
+});
+</script>
+
+<template>
+  <div
+    class="w-[250px] h-full flex flex-col justify-between bg-slate-100 dark:bg-[#090a0d] rounded-r-lg p-2"
+  >
+    <div class="h-4/5 overflow-y-scroll">
+      <div
+        class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
+      >
+        <div class="flex items-center gap-2">
+          <img class="w-10" src="/images/logo.png" alt="Bot" />
+          <span class="font-semibold">New Chat</span>
+        </div>
+        <Icon class="text-xl" name="material-symbols:add-circle" />
+      </div>
+      <hr
+        class="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700 duration-300"
+      />
+      <span
+        class="text-xs font-semibold text-gray-400 dark:text-gray-500 duration-300 mb-3"
+      >
+        Chats
+      </span>
+      <div class="flex flex-col gap-1">
+        <AppChat title="How To Be A Software Engineer" />
+      </div>
+    </div>
+    <div class="h-1/5 flex flex-col justify-end">
+      <div
+        class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
+      >
+        <div class="flex items-center gap-2">
+          <span class="font-semibold">Switch To Voice Mode</span>
+        </div>
+        <Icon name="material-symbols:switch-right-rounded" />
+      </div>
+      <div class="w-full relative">
+        <div
+          class="w-full flex flex-col h-[100px] origin-bottom absolute -top-[105px] rounded bg-slate-100 dark:bg-[#111217] duration-300 border border-gray-300 dark:border-gray-800"
+          :class="{
+            'scale-y-0 opacity-0': !isInfoOpen,
+            'scale-y-100 opacity-100': isInfoOpen,
+          }"
+        >
+          <div
+            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921]"
+          >
+            <span>Settings</span>
+            <Icon
+              name="material-symbols:settings-outline-rounded"
+              class="text-xl"
+            />
+          </div>
+          <div
+            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921]"
+          >
+            <span>Log Out</span>
+            <Icon name="material-symbols:logout" class="text-xl" />
+          </div>
+        </div>
+        <div
+          class="profile relative w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
+          @click="isInfoOpen = !isInfoOpen"
+        >
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full overflow-hidden">
+              <img class="w-full" src="/images/user.avif" alt="User" />
+            </div>
+            <span class="font-semibold">Tharindu Nimesh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>

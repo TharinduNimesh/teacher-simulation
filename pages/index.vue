@@ -1,11 +1,11 @@
 <script setup>
 useHead({
-  title: "Login",
+  title: "Login | Jennie - Virtual Learning Assistant",
   meta: [
     {
       name: "description",
       content:
-        "Login to your account to access the Elevate Learning, Sri Lanka's Way !",
+        "Meet Jennie, your virtual learning companion! Elevate your academic journey with personalized guidance, interactive lessons, and instant support. Empowering Sri Lankan students for success in every study session.",
     },
   ],
 });
@@ -31,7 +31,7 @@ const color = useColorMode();
           </p>
           <img
             class="w-1/2 max-w-[160px] mt-4 md:hidden"
-            src="/images/auth-bot.png"
+            src="/images/logo.png"
             alt="Bot"
           />
         </div>
@@ -42,16 +42,17 @@ const color = useColorMode();
       class="hidden md:flex flex-col md:w-1/2 min-h-full bg-[#f7faff55] dark:bg-[#1f293755] rounded-l backdrop-blur-lg justify-center items-center duration-300"
     >
       <div class="flex flex-col justify-center items-center w-2/3 gap-3">
-        <img class="w-1/2 max-w-[400px]" src="/images/auth-bot.png" alt="Bot" />
+        <img class="w-1/2 max-w-[400px]" src="/images/logo.png" alt="Bot" />
         <h2
           class="text-2xl font-bold text-center uppercase text-slate-800 dark:text-slate-100"
         >
           Elevate Learning, Sri Lanka's Way !
         </h2>
         <p class="text-md text-center text-slate-500 dark:text-slate-300">
-          Revolutionize education in Sri Lanka with our Simulated Teacher app
-          and Alexa-like device. Personalized, interactive, and empowering—the
-          future of learning is here, at your fingertips.
+          Introducing Jennie, your academic ally! With Jennie's personalized
+          tutoring and interactive lessons, learning becomes a joy. Instant
+          support and tailored guidance redefine education for Sri Lankan
+          students, ensuring success in every study endeavor.
         </p>
       </div>
     </div>
