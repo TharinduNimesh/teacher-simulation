@@ -1,5 +1,4 @@
 <script setup>
-const isDark = inject("isDark");
 const remember = ref(false);
 
 function login() {
@@ -24,12 +23,7 @@ function login() {
     <div class="flex justify-between items-center mt-1 px-1">
       <UCheckbox v-model="remember" name="Remember" label="Remember me" />
       <NuxtLink to="/">
-        <span
-          class="text-sm"
-          :class="{
-            'text-gray-500': !isDark,
-            'text-slate-300': isDark,
-          }"
+        <span class="text-sm text-gray-500 dark:text-gray-300"
           >Forgot Password?</span
         >
       </NuxtLink>
@@ -37,12 +31,7 @@ function login() {
     <div class="w-full flex flex-col items-center mt-5">
       <PrimaryButton text="Sign In" styles="w-full" @clicked="login" />
       <NuxtLink to="/" class="cursor-pointer mt-1">
-        <span
-          class="text-sm mt-3"
-          :class="{
-            'text-gray-500': !isDark,
-            'text-slate-300': isDark,
-          }"
+        <span class="text-sm mt-3 text-gray-500 dark:text-gray-300"
           >Don't have an account? <span class="underline">Sign up</span></span
         >
       </NuxtLink>

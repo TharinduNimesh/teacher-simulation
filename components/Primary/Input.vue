@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps(["label", "icon", "placeholder", "type"]);
-const isDark = inject("isDark");
 
 const displayType = ref(props.type);
 
@@ -14,11 +13,7 @@ const togglePassword = () => {
 <template>
   <div class="w-full mt-5">
     <label
-      class="block text-sm mb-1 mx-2 uppercase"
-      :class="{
-        'text-gray-500': !isDark,
-        'text-slate-400': isDark,
-      }"
+      class="block text-sm mb-1 mx-2 uppercase text-gray-500 dark:text-slate-400"
       >{{ label }}</label
     >
     <div class="flex relative w-full">
@@ -31,10 +26,8 @@ const togglePassword = () => {
       </div>
       <input
         :type="displayType"
-        class="w-full h-10 bg-transparent rounded border px-3 py-2 outline-none focus:border-blue-500 duration-300"
+        class="w-full h-10 bg-transparent rounded border px-3 py-2 outline-none border-gray-400 placeholder:text-gray-500 dark:border-slate-500 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-500 duration-300"
         :class="{
-          'border-gray-500 placeholder:text-gray-500': isDark,
-          'border-slate-400 placeholder:text-slate-400': !isDark,
           'pr-10': isPassword,
           'pl-10': icon != null,
         }"
@@ -53,7 +46,7 @@ const togglePassword = () => {
         <Icon
           class="text-gray-500"
           name="mdi:eye-off-outline"
-          v-if="displayType === 'text'"
+          v-else
         />
       </div>
     </div>
