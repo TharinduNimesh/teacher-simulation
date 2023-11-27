@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model chat {
+  id      Int       @id @default(autoincrement()) @db.UnsignedInt
+  title   String    @db.VarChar(80)
+  user_id Int       @db.UnsignedInt
+  user    user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_chat_user")
+  message message[]
+
+  @@index([user_id], map: "fk_chat_user_idx")
+}
+
+model message {
+  id      Int     @id @default(autoincrement()) @db.UnsignedInt
+  message String? @db.Text
+  is_bot  Int     @db.TinyInt
+  chat_id Int     @db.UnsignedInt
+  chat    chat    @relation(fields: [chat_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_message_chat1")
+
+  @@index([chat_id], map: "fk_message_chat1_idx")
+}
+
+model user {
+  id         Int    @id @default(autoincrement()) @db.UnsignedInt
+  first_name String @db.VarChar(45)
+  last_name  String @db.VarChar(45)
+  email      String @db.VarChar(80)
+  password   String @db.VarChar(255)
+  chat       chat[]
+}
