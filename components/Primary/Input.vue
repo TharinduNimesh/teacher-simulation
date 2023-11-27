@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["label", "icon", "placeholder", "type"]);
+const props = defineProps(["label", "icon", "placeholder", "type", "modelValue"]);
 
 const displayType = ref(props.type);
 
@@ -32,6 +32,7 @@ const togglePassword = () => {
           'pl-10': icon != null,
         }"
         :placeholder="placeholder"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <div
         v-if="isPassword"

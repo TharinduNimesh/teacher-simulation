@@ -10,6 +10,7 @@ function toggleSidebar() {
 const isWelcome = computed(() => {
   return messages.value.length === 0;
 });
+
 </script>
 
 <template>
