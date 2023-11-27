@@ -30,7 +30,7 @@ function login() {
     </div>
     <div class="w-full flex flex-col items-center mt-5">
       <PrimaryButton text="Sign In" styles="w-full" @clicked="login" />
-      <NuxtLink to="/" class="cursor-pointer mt-1">
+      <NuxtLink to="/register" class="cursor-pointer mt-1">
         <span class="text-sm mt-3 text-gray-500 dark:text-gray-300"
           >Don't have an account? <span class="underline">Sign up</span></span
         >
