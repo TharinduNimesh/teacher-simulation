@@ -39,8 +39,8 @@ onMounted(() => {
       'md:ml-0': isSidebarOpen,
     }"
   >
-    <div 
-      class="absolute top-5 md:hidden -right-11 bg-slate-100 w-10 h-10 rounded flex justify-center items-center cursor-pointer"
+    <div
+      class="absolute top-5 md:hidden -right-11 bg-slate-100 dark:bg-[#090a0d] w-10 h-10 rounded flex justify-center items-center cursor-pointer"
       :class="{
         hidden: !isSidebarOpen,
       }"
@@ -51,6 +51,7 @@ onMounted(() => {
     <div class="h-4/5 overflow-y-scroll p-2">
       <div
         class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
+        @click="$router.push('/chat')"
       >
         <div class="flex items-center gap-2">
           <img class="w-10" src="/images/logo.png" alt="Bot" />
@@ -98,6 +99,7 @@ onMounted(() => {
           </div>
           <div
             class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921] cursor-pointer"
+            @click="$router.push('/')"
           >
             <span>Log Out</span>
             <Icon name="material-symbols:logout" class="text-xl" />

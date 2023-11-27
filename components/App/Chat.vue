@@ -3,7 +3,8 @@ defineProps(['title', 'isActive'])
 </script>
 
 <template>
-  <div
+  <NuxtLink
+    to="/chat/1"
     class="relative w-full flex px-3 py-3 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300 overflow-hidden"
     :class="{
       'chat-dark': $colorMode.preference === 'dark',
@@ -15,7 +16,7 @@ defineProps(['title', 'isActive'])
         {{ title }}
       </span>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <style scoped>

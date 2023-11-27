@@ -1,5 +1,5 @@
 <script setup>
-const messages = ref([1]);
+const messages = ref([]);
 
 const sidebar = useSideBar();
 
@@ -10,14 +10,10 @@ function toggleSidebar() {
 const isWelcome = computed(() => {
   return messages.value.length === 0;
 });
-useColorMode().preference = "dark";
 </script>
 
 <template>
-  <div
-    class="w-full h-screen flex bg-slate-200 dark:bg-[#18191f] overflow-hidden"
-  >
-    <AppSideBar />
+  <NuxtLayout name="chat">
     <div class="flex-1 flex flex-col gap-5">
       <div class="w-full flex flex-col md:hidden">
         <div class="flex justify-between items-center px-3">
@@ -27,7 +23,9 @@ useColorMode().preference = "dark";
           >
             <Icon name="ic:baseline-menu" class="text-2xl" />
           </div>
-          <span class="text-gray-700 dark:text-slate-300 font-bold">New Chat</span>
+          <span class="text-gray-700 dark:text-slate-300 font-bold"
+            >New Chat</span
+          >
         </div>
         <hr class="h-1 w-full bg-gray-400 dark:bg-gray-700 duration-300" />
       </div>
@@ -47,38 +45,7 @@ useColorMode().preference = "dark";
           </h1>
         </div>
         <div v-show="!isWelcome" class="pt-10 gap-2">
-          <div
-            v-for="msg in 1"
-            :key="msg"
-            class="flex justify-start items-start gap-5 mt-2"
-          >
-            <img src="/images/logo.png" alt="Jennie" class="w-8" />
-            <div
-              class="bot-chat relative min-w-[40%] px-5 py-3 max-w-[80%] text-gray-700 dark:text-slate-300 bg-[#ebefff] dark:bg-[#0a0c14] self-start duration-300 rounded-r-lg rounded-bl-lg shadow-lg"
-              :style="`--corner-image: url('/images/bot-chat-corner-${$colorMode.preference}.png');`"
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-              eaque fugiat incidunt similique ratione dolorem temporibus,
-              cumque, sint, voluptates est nesciunt aliquam sequi architecto at
-              aspernatur eveniet nisi corporis magni!
-            </div>
-          </div>
-
-          <div
-            v-for="msg in 1"
-            :key="msg"
-            class="flex justify-end items-start gap-5 mt-2"
-          >
-            <div
-              class="client-chat relative min-w-[40%] px-5 py-3 max-w-[80%] bg-blue-700 text-slate-100 self-start duration-300 rounded-l-lg rounded-br-lg shadow-lg"
-            >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-              eaque fugiat incidunt similique ratione dolorem temporibus,
-              cumque, sint, voluptates est nesciunt aliquam sequi architecto at
-              aspernatur eveniet nisi corporis magni!
-            </div>
-            <img src="/images/user.avif" alt="User" class="w-8 rounded-full" />
-          </div>
+          <!-- Chat Goes Here -->
         </div>
       </div>
       <div
@@ -104,33 +71,5 @@ useColorMode().preference = "dark";
         </div>
       </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
-
-<style scoped>
-.bot-chat::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -10px;
-  width: 10px;
-  height: 30px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: var(--corner-image);
-}
-
-.client-chat::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -10px;
-  width: 10px;
-  height: 30px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("/images/client-chat-corner.png");
-}
-</style>
