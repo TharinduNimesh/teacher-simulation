@@ -22,14 +22,14 @@ useColorMode().preference = "dark";
       <div class="w-full flex flex-col md:hidden">
         <div class="flex justify-between items-center px-3">
           <div
-            class="w-10 h-10 my-2 rounded-full bg-gray-800 flex justify-center items-center cursor-pointer"
+            class="w-10 h-10 my-2 rounded-full bg-slate-100 dark:bg-gray-800 flex justify-center items-center cursor-pointer"
             @click="toggleSidebar"
           >
             <Icon name="ic:baseline-menu" class="text-2xl" />
           </div>
           <span class="text-gray-700 dark:text-slate-300 font-bold">New Chat</span>
         </div>
-        <hr class="h-1 w-full bg-gray-200 dark:bg-gray-700 duration-300" />
+        <hr class="h-1 w-full bg-gray-400 dark:bg-gray-700 duration-300" />
       </div>
       <div
         class="w-full h-5/6 flex flex-col gap-5 px-10 overflow-y-scroll"

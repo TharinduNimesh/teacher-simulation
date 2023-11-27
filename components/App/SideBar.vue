@@ -39,14 +39,15 @@ onMounted(() => {
       'md:ml-0': isSidebarOpen,
     }"
   >
-    <div
-      class="absolute -z-10 w-screen h-screen bg-[#090a0d] opacity-0 md:hidden"
+    <div 
+      class="absolute top-5 md:hidden -right-11 bg-slate-100 w-10 h-10 rounded flex justify-center items-center cursor-pointer"
       :class="{
         hidden: !isSidebarOpen,
-        'opacity-70': isSidebarOpen,
       }"
       @click="toggleSidebar"
-    ></div>
+    >
+      <Icon name="material-symbols-light:close-rounded" class="text-2xl" />
+    </div>
     <div class="h-4/5 overflow-y-scroll p-2">
       <div
         class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
@@ -58,7 +59,7 @@ onMounted(() => {
         <Icon class="text-xl" name="material-symbols:add-circle" />
       </div>
       <hr
-        class="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700 duration-300"
+        class="h-px my-5 bg-gray-400 border-0 dark:bg-gray-700 duration-300"
       />
       <span
         class="text-xs font-semibold text-gray-400 dark:text-gray-500 duration-300 mb-3"
