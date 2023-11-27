@@ -10,13 +10,12 @@ useHead({
   ],
 });
 
-const color = useColorMode();
 </script>
 
 <template>
   <div
     class="w-full min-h-screen bg-cover bg-center flex"
-    :style="`background-image: url(/images/${color.preference}-background.png)`"
+    :style="`background-image: url(/images/${$colorMode.preference}-background.png)`"
   >
     <div
       class="w-full md:w-1/2 min-h-full flex justify-center items-center p-5"

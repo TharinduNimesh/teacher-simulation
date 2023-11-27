@@ -3,6 +3,25 @@ useHead({
   title: "Chat | Jennie - Virtual Learning Assistant",
 });
 const isInfoOpen = ref(false);
+const isSidebarOpen = useSideBar();
+
+const iconStyles = computed(() => {
+  if (isSidebarOpen.value) {
+    return {
+      top: "rotate(20deg)",
+      bottom: "rotate(-20deg)",
+    };
+  } else {
+    return {
+      top: "rotate(-20deg)",
+      bottom: "rotate(20deg)",
+    };
+  }
+});
+
+function toggleSidebar() {
+  isSidebarOpen.value = !isSidebarOpen.value;
+}
 
 onMounted(() => {
   window.addEventListener("click", (e) => {
@@ -14,9 +33,21 @@ onMounted(() => {
 
 <template>
   <div
-    class="w-[250px] h-full flex flex-col justify-between bg-slate-100 dark:bg-[#090a0d] rounded-r-lg p-2"
+    class="absolute z-50 md:static w-[250px] h-full flex flex-col justify-between bg-slate-100 dark:bg-[#090a0d] rounded-r-lg duration-300"
+    :class="{
+      '-ml-[250px]': !isSidebarOpen,
+      'md:ml-0': isSidebarOpen,
+    }"
   >
-    <div class="h-4/5 overflow-y-scroll">
+    <div
+      class="absolute -z-10 w-screen h-screen bg-[#090a0d] opacity-0 md:hidden"
+      :class="{
+        hidden: !isSidebarOpen,
+        'opacity-70': isSidebarOpen,
+      }"
+      @click="toggleSidebar"
+    ></div>
+    <div class="h-4/5 overflow-y-scroll p-2">
       <div
         class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
       >
@@ -38,7 +69,7 @@ onMounted(() => {
         <AppChat title="How To Be A Software Engineer" />
       </div>
     </div>
-    <div class="h-1/5 flex flex-col justify-end">
+    <div class="h-1/5 min-h-[100px] flex flex-col justify-end">
       <div
         class="w-full flex px-3 py-2 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300"
       >
@@ -56,7 +87,7 @@ onMounted(() => {
           }"
         >
           <div
-            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921]"
+            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921] cursor-pointer"
           >
             <span>Settings</span>
             <Icon
@@ -65,7 +96,7 @@ onMounted(() => {
             />
           </div>
           <div
-            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921]"
+            class="w-full h-1/2 flex justify-between items-center px-3 text-gray-500 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-[#181921] cursor-pointer"
           >
             <span>Log Out</span>
             <Icon name="material-symbols:logout" class="text-xl" />
@@ -83,6 +114,21 @@ onMounted(() => {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="h-full justify-center items-center hidden md:flex">
+    <div
+      class="flex h-6 w-6 flex-col items-center cursor-pointer"
+      @click="toggleSidebar"
+    >
+      <div
+        class="h-3 w-1 rounded-full bg-gray-500 dark:bg-slate-300 duration-300"
+        :style="`transform: translateY(0.15rem) ${iconStyles.top} translateZ(0px)`"
+      ></div>
+      <div
+        class="h-3 w-1 rounded-full bg-gray-500 dark:bg-slate-300 duration-300"
+        :style="`transform: translateY(-0.15rem) ${iconStyles.bottom} translateZ(0px)`"
+      ></div>
     </div>
   </div>
 </template>
