@@ -2,11 +2,25 @@ import express from "express";
 import { check, validationResult } from "express-validator";
 import { PrismaClient } from "@prisma/client";
 
+// Middlewares
+import auth from "./middleware/auth";
+
 const router = express.Router();
 const prisma = new PrismaClient();
 
-router.get("/", (req, res) => {
-  res.send("All Chats");
+router.get("/", [auth], async (req, res) => {
+  const chats = await prisma.chat.findMany({
+    where: {
+      user_id: req.user.id,
+    },
+    orderBy: {
+      id: "desc",
+    },
+  });
+
+  res.json({
+    chats,
+  });
 });
 
 // message validation rules
@@ -20,7 +34,7 @@ const messageValidations = [
   check("chat").trim().notEmpty().withMessage("Chat is required"),
 ];
 
-router.post("/message", [messageValidations], async (req, res) => {
+router.post("/message", [auth, messageValidations], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json(errors.array());
@@ -56,7 +70,7 @@ router.post("/message", [messageValidations], async (req, res) => {
     chat = await prisma.chat.create({
       data: {
         title: req.body.message,
-        user_id: 1,
+        user_id: req.user.id,
       },
     });
     chat = chat.id;
@@ -79,11 +93,25 @@ router.post("/message", [messageValidations], async (req, res) => {
 
   res.json({
     response: output.candidates[0].content,
+    chat: chat,
   });
 });
 
-router.get("/:id", (req, res) => {
-  res.send("Single Chat");
+router.get("/:id", async (req, res) => {
+  let chat = parseInt(req.params.id);
+
+  const messages = await prisma.message.findMany({
+    where: {
+      chat_id: chat,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+
+  res.json({
+    messages,
+  });
 });
 
 export default router;

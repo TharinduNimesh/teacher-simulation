@@ -29,6 +29,8 @@ onMounted(() => {
     isInfoOpen.value = false;
   });
 });
+
+const { pending: isLoading, data: chats } = await useApiFetch("/chat");
 </script>
 
 <template>
@@ -68,7 +70,12 @@ onMounted(() => {
         Chats
       </span>
       <div class="flex flex-col gap-1">
-        <AppChat title="How To Be A Software Engineer" />
+        <AppChat
+          v-for="chat in chats.chats"
+          :key="chat.id"
+          :title="chat.title"
+          :unique-id="chat.id"
+        />
       </div>
     </div>
     <div class="h-1/5 min-h-[100px] flex flex-col justify-end">

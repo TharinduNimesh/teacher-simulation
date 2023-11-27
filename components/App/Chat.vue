@@ -1,10 +1,10 @@
 <script setup>
-defineProps(['title', 'isActive'])
+defineProps(['title', 'isActive', 'uniqueId'])
 </script>
 
 <template>
   <NuxtLink
-    to="/chat/1"
+    :to="`/chat/${uniqueId}`"
     class="relative w-full flex px-3 py-3 justify-between items-center cursor-pointer hover:bg-slate-200 dark:hover:bg-[#111217] rounded duration-300 overflow-hidden"
     :class="{
       'chat-dark': $colorMode.preference === 'dark',

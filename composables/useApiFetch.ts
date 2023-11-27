@@ -10,7 +10,7 @@ export function useApiFetch<T>(
   const token = useCookie("auth-token");
 
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    headers["Authorization"] = `Bearer ${token.value}`;
   }
 
   const url = (process.env.SERVER_URL || 'http://localhost:8000') + path;

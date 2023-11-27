@@ -1,5 +1,6 @@
 <script setup>
 const messages = ref([]);
+const message = ref("");
 
 const sidebar = useSideBar();
 
@@ -11,6 +12,28 @@ const isWelcome = computed(() => {
   return messages.value.length === 0;
 });
 
+async function send() {
+  if (message.value.trim() === "") return;
+  messages.value.push({
+    message: message.value,
+    isBot: false,
+  });
+  const { pending: typing, data } = await useApiFetch("/chat/message", {
+    method: "POST",
+    body: {
+      message: message.value,
+      chat: 0,
+    },
+  });
+  if (data.value) {
+    useRouter().push(`/chat/${data.value.chat}`);
+    messages.value.push({
+      message: data.value.response,
+      isBot: true,
+    });
+  }
+  message.value = "";
+}
 </script>
 
 <template>
@@ -46,7 +69,10 @@ const isWelcome = computed(() => {
           </h1>
         </div>
         <div v-show="!isWelcome" class="pt-10 gap-2">
-          <!-- Chat Goes Here -->
+          <template v-for="msg in messages" :key="msg.message">
+            <AppBotMsg v-if="msg.isBot" :message="msg.message" />
+            <AppUserMsg v-else :message="msg.message" />
+          </template>
         </div>
       </div>
       <div
@@ -57,9 +83,12 @@ const isWelcome = computed(() => {
             type="text"
             class="w-full h-12 bg-transparent rounded border px-3 py-2 outline-none border-gray-400 placeholder:text-gray-500 dark:border-slate-500 dark:placeholder:text-slate-500 focus:border-blue-500 dark:focus:border-blue-500 duration-300"
             placeholder="Type your message here..."
+            v-model="message"
+            @keyup.enter="send"
           />
           <div
             class="absolute h-12 w-12 flex justify-center items-center right-0 cursor-pointer"
+            @click="send"
           >
             <Icon name="ic:baseline-send" class="text-2xl" />
           </div>
